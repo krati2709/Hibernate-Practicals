@@ -14,5 +14,6 @@
 		<property name="show_sql">true</property>
 		
 		<mapping resource="com/rays/user/UserDTO.hbm.xml" />
+		
     </session-factory>
 </hibernate-configuration>

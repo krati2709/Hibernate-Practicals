@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 18-Dec-2025, 12:38:08 pm by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.rays.user.UserDTO" table="USERDTO">
+    <class name="com.rays.user.UserDTO" table="ST_USER">
         <id name="id" type="int">
             <column name="ID" />
             <generator class="assigned" />
