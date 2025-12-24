@@ -5,9 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.rays.user.UserDTO;
+import com.rays.auction.AuctionItem;
 
-public class TestUpdateMerge {
+public class TestDirtyCheck {
 
 	public static void main(String[] args) {
 
@@ -15,22 +15,14 @@ public class TestUpdateMerge {
 
 		Session session = sf.openSession();
 
-		UserDTO dto = (UserDTO) session.get(UserDTO.class, 1);
+		Transaction tx = session.beginTransaction();
 
-		session.close();
+		AuctionItem item = (AuctionItem) session.get(AuctionItem.class, 1);
 
-		dto.setFirstName("kriti");
-
-		Session session2 = sf.openSession();
-
-		Transaction tx = session2.beginTransaction();
-
-//		session2.merge(dto);
-
-		session2.update(dto);
+		item.setDescription("change");
 
 		tx.commit();
 
-		session2.close();
+		session.close();
 	}
 }

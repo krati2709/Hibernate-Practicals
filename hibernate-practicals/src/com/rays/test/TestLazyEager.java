@@ -1,13 +1,16 @@
 package com.rays.test;
 
+import java.util.Iterator;
+import java.util.Set;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.rays.user.UserDTO;
+import com.rays.auction.AuctionItem;
 
-public class TestUpdateMerge {
+public class TestLazyEager {
 
 	public static void main(String[] args) {
 
@@ -15,22 +18,15 @@ public class TestUpdateMerge {
 
 		Session session = sf.openSession();
 
-		UserDTO dto = (UserDTO) session.get(UserDTO.class, 1);
+		Transaction tx = session.beginTransaction();
 
-		session.close();
+		AuctionItem item = (AuctionItem) session.get(AuctionItem.class, 1);
 
-		dto.setFirstName("kriti");
+//		 Set s = item.getBids();
 
-		Session session2 = sf.openSession();
-
-		Transaction tx = session2.beginTransaction();
-
-//		session2.merge(dto);
-
-		session2.update(dto);
+//		 Iterator it = s.iterator();
 
 		tx.commit();
-
-		session2.close();
+		session.close();
 	}
 }
